@@ -6,7 +6,10 @@
 </template>
 
 <script>
-    import graph from "@/components/core/editorcore";
+
+    import {Graph} from "@/components/core/editorcore";
+
+    const g = new Graph();
 
     const data = {
         nodes: [{
@@ -43,15 +46,17 @@
         },
         watch: {
             nodes () {
-                graph.draw(data);
+                g.draw(data);
             }
         },
         mounted () {
-            graph.init(document.getElementById('mountNode'));
-            graph.draw(data);
+            console.log(g);
+            const t = g.init(document.getElementById('mountNode'));
+            t.draw(data);
         },
         methods: {
             add () {
+                // let i = 1;
                 this.nodes.push({
                     x: 50,
                     y: 100,
