@@ -1,28 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        <div id="mountNode"></div>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+    import graph from "@/components/core/editorcore";
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+    const data = {
+        nodes: [{
+            id: 'node1',
+            x: 100,
+            y: 200
+        }, {
+            id: 'node2',
+            x: 300,
+            y: 200
+        }],
+        edges: [{
+            source: 'node1',
+            target: 'node2'
+        }]
+    };
+    export default {
+        name: 'app',
+        data () {
+            return {}
+        },
+        mounted () {
+            graph.init(document.getElementById('mountNode'));
+            graph.draw(data);
+        },
+        components: {}
+    }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    #app {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 60px;
+    }
 </style>
