@@ -51,8 +51,8 @@
         },
         mounted () {
             console.log(g);
-            const t = g.init(document.getElementById('mountNode'));
-            t.draw(data);
+            g.init(document.getElementById('mountNode'));
+            g.draw(data);
         },
         methods: {
             add () {

@@ -9,18 +9,14 @@ import G6 from '@antv/g6';
 
 export class Graph{
     constructor(){
-
-
-
     }
     static graph;
     //初始化
     init(containerDom){
-        let graph = this.graph;
-        if (graph) {
-            return graph;
+        if (this.graph) {
+            return this.graph;
         }
-        graph = new G6.Graph({
+        this.graph = new G6.Graph({
             container: containerDom,
             width: 500,
             height: 500,
@@ -38,7 +34,7 @@ export class Graph{
 
             }
         });
-        return graph;
+        return this.graph;
     }
     //渲染
     draw(data){
