@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <div id="mountNode"></div>
+        <button id="btn" @click="add">add</button>
     </div>
 </template>
 
@@ -9,29 +10,56 @@
 
     const data = {
         nodes: [{
-            id: 'node1',
             x: 100,
-            y: 200
+            y: 100,
+            shape: 'circle',
+            label: 'circle',
         }, {
-            id: 'node2',
+            x: 200,
+            y: 100,
+            shape: 'rect',
+            label: 'rect',
+        }, {
             x: 300,
-            y: 200
-        }],
-        edges: [{
-            source: 'node1',
-            target: 'node2'
+            y: 100,
+            size: [60, 30],
+            shape: 'ellipse',
+            label: 'ellipse',
+        }, {
+            x: 400,
+            y: 100,
+            shape: 'image',
+            img: 'https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg',
+            label: 'image',
         }]
     };
+
     export default {
         name: 'app',
         data () {
-            return {}
+            return {
+                nodes: data.nodes,
+            }
+        },
+        watch: {
+            nodes () {
+                graph.draw(data);
+            }
         },
         mounted () {
             graph.init(document.getElementById('mountNode'));
             graph.draw(data);
         },
-        components: {}
+        methods: {
+            add () {
+                this.nodes.push({
+                    x: 50,
+                    y: 100,
+                    shape: 'circle',
+                    label: 'circle',
+                })
+            }
+        }
     }
 </script>
 

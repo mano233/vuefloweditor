@@ -14,7 +14,20 @@ function init (containerDom) {
     graph = new G6.Graph({
         container: containerDom,
         width: 500,
-        height: 500
+        height: 500,
+        modes: {
+
+            default: ['drag-canvas', {
+
+                type: 'zoom-canvas',
+
+                sensitivity: 5
+
+            }],
+
+            edit: ['click-select']
+
+        }
     });
     return graph;
 }
