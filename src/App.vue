@@ -1,7 +1,6 @@
 <template>
     <div id="app">
         <div id="mountNode"></div>
-        <button id="btn" @click="add">add</button>
         <button  @click="addElement">添加元素</button>
         <button  @click="addLine">添加线条</button>
         <button  @click="deleteItem">删除元素</button>
@@ -9,31 +8,18 @@
 </template>
 
 <script>
-
     import {Graph} from "@/components/core/editorcore";
 
-    const g = new Graph();
-
-    const data = {
-        nodes: [],
-        edges: []
-    };
-
+    let g = null;
     export default {
         name: 'app',
         data () {
             return {
-                nodes: data.nodes,
                 count: 1,
             }
         },
-        watch: {
-            nodes () {
-                g.draw(data);
-            }
-        },
         mounted () {
-            g.init({
+            g = Graph.init({
                 container: document.getElementById('mountNode'),
                 width: 500,
                 height: 500,
@@ -44,30 +30,20 @@
                     deleteItem : ['click-select','delete-add-node']
                 },
             });
-            g.draw(data);
+
         },
         methods: {
-            //增加节点
-            add () {
-                this.count += 20;
-                this.nodes.push({
-                    x: 50 + this.count,
-                    y: 10 + this.count,
-                    shape: 'circle',
-                    label: 'circle',
-                })
-            },
             //切换模式(添加元素)
             addElement(){
-                g.instance.setMode('addElement');
+                g.setMode('addElement');
             },
             //切换模式(添加线条)
             addLine(){
-                g.instance.setMode('addLine');
+                g.setMode('addLine');
             },
             //删除节点
             deleteItem(){
-                g.instance.setMode('deleteItem');
+                g.setMode('deleteItem');
             }
         }
     }
