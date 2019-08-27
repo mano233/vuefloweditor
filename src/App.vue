@@ -1,13 +1,16 @@
 <template>
     <div id="app">
+        <!--工具栏-->
         <div class="toolbar_container">
             <ToolBar></ToolBar>
         </div>
+        <!--文本-->
         <div class="context">
             <ItemPanel></ItemPanel>
             <Canvas></Canvas>
             <Details></Details>
         </div>
+
     </div>
 </template>
 

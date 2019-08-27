@@ -1,13 +1,13 @@
 <template>
+
     <div class="toolbar">
         <a-button-group>
-            <a-button @click="addElement">添加元素</a-button>
-            <a-button @click="addLine">添加线条</a-button>
-            <a-button @click="deleteItem" type="dashed">删除元素</a-button>
+            <a-button  @click="addElementCircle">添加圆形元素</a-button>
+            <a-button  @click="addElementRect">添加方形元素</a-button>
+            <a-button  @click="addLine">添加直线线条</a-button>
+            <a-button  @click="addCurve">添加曲线线条</a-button>
+            <a-button  @click="deleteItem">删除元素</a-button>
         </a-button-group>
-        <!--<button  @click="addElement">添加元素</button>-->
-        <!--<button  @click="addLine">添加线条</button>-->
-        <!--<button  @click="deleteItem">删除元素</button>-->
     </div>
 </template>
 
@@ -29,23 +29,30 @@
                 height: 500,
                 modes: {
                     default: ['drag-node', 'click-select'],
-                    addElement : ['drag-node','click-select','click-add-node'],
-                    addLine : ['drag-node','click-select','click-add-edge'],
+                    addElementCircle : ['drag-node','click-select','click-add-node-circle'],
+                    addElementRect : ['drag-node','click-select','click-add-node-rect'],
+                    addLine : ['drag-node','click-select','click-add-edge-line'],
+                    addCurve : ['drag-node','click-select','click-add-edge-curve'],
                     deleteItem : ['click-select','delete-add-node']
                 },
             });
-            console.log(g.instance)
-
         },
         methods: {
-            //切换模式(添加元素)
-            addElement(){
-                g.setMode('addElement');
+            //切换模式(添加圆形元素)
+            addElementCircle(){
+                g.setMode('addElementCircle');
             },
-            //切换模式(添加线条)
+            //切换模式(添加方形元素)
+            addElementRect(){
+                g.setMode('addElementRect');
+            },
+            //切换模式(添加直线)
             addLine(){
-                console.log(g)
                 g.setMode('addLine');
+            },
+            //切换模式(添加曲线)
+            addCurve(){
+                g.setMode('addCurve');
             },
             //删除节点
             deleteItem(){

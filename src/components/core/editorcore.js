@@ -3,13 +3,9 @@ import './behaviors';
 
 export class Graph{
     constructor () {
-        //this.instance = null;
+        this.instance = null;
     }
-
     static instance = null;
-    addItem () {
-
-    }
     /**
      *
      * @param canvasOptions
@@ -26,7 +22,7 @@ export class Graph{
      *
      * @param data
      */
-    draw(data){
+    static draw(data){
         if (!data) {
             throw new Error('data not fount');
         }
