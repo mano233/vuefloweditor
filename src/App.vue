@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <div id="mountNode"></div>
+        <div id="mountNode" style="border: 1px solid red;"></div>
         <button id="btn" @click="add">add</button>
     </div>
 </template>
@@ -13,28 +13,19 @@
 
     const data = {
         nodes: [{
+            id:'node1',
             x: 100,
             y: 100,
             shape: 'circle',
             label: 'circle',
-        }, {
-            x: 200,
-            y: 100,
-            shape: 'rect',
-            label: 'rect',
-        }, {
+        },{
+            id : 'node2',
             x: 300,
-            y: 100,
-            size: [60, 30],
-            shape: 'ellipse',
-            label: 'ellipse',
-        }, {
-            x: 400,
-            y: 100,
-            shape: 'image',
-            img: 'https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg',
-            label: 'image',
-        }]
+            y: 300,
+            shape: 'circle',
+            label: 'circle',
+        }],
+        // edges: []
     };
 
     export default {
@@ -42,6 +33,7 @@
         data () {
             return {
                 nodes: data.nodes,
+                count : 1
             }
         },
         watch: {
@@ -50,26 +42,27 @@
             }
         },
         mounted () {
-            console.log(g);
             g.init(document.getElementById('mountNode'));
             g.draw(data);
         },
         methods: {
             add () {
-                // let i = 1;
+                this.count += 20;
                 this.nodes.push({
-                    x: 50,
-                    y: 100,
+                    x: 50 + this.count,
+                    y: 10 + this.count,
                     shape: 'circle',
                     label: 'circle',
                 })
-            }
+                console.log(data)
+            },
         }
     }
 </script>
 
 <style>
     #app {
+        position: relative;
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
