@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <div id="mountNode" style="border: 1px solid red;"></div>
+        <div id="mountNode"></div>
         <button id="btn" @click="add">add</button>
     </div>
 </template>
@@ -33,7 +33,7 @@
         data () {
             return {
                 nodes: data.nodes,
-                count : 1
+                count: 1,
             }
         },
         watch: {
@@ -42,7 +42,14 @@
             }
         },
         mounted () {
-            g.init(document.getElementById('mountNode'));
+            g.init({
+                container: document.getElementById('mountNode'),
+                width: 500,
+                height: 500,
+                modes: {
+                    default: ['drag-node', 'click-select', 'click-add-edge']
+                },
+            });
             g.draw(data);
         },
         methods: {
@@ -54,13 +61,15 @@
                     shape: 'circle',
                     label: 'circle',
                 })
-                console.log(data)
             },
         }
     }
 </script>
 
 <style>
+    canvas {
+        border: 1px solid red;
+    }
     #app {
         position: relative;
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
