@@ -1,8 +1,13 @@
 <template>
-    <div class="ToolBar">
-        <button  @click="addElement">添加元素</button>
-        <button  @click="addLine">添加线条</button>
-        <button  @click="deleteItem">删除元素</button>
+    <div class="toolbar">
+        <a-button-group>
+            <a-button @click="addElement">添加元素</a-button>
+            <a-button @click="addLine">添加线条</a-button>
+            <a-button @click="deleteItem" type="dashed">删除元素</a-button>
+        </a-button-group>
+        <!--<button  @click="addElement">添加元素</button>-->
+        <!--<button  @click="addLine">添加线条</button>-->
+        <!--<button  @click="deleteItem">删除元素</button>-->
     </div>
 </template>
 
@@ -10,17 +15,11 @@
     import {Graph} from "@/components/core/editorcore";
     let g = null;
 
-    const data = {
-        nodes : [],
-        edges : []
-    }
-
     export default {
         name: "ToolBar",
         data () {
             return {
                 count: 1,
-                data : data.nodes
             }
         },
         mounted () {
@@ -57,8 +56,12 @@
 </script>
 
 <style scoped>
-.ToolBar{
-    width: 100%;
-    border: 1px solid black;
-}
+    .toolbar {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
 </style>

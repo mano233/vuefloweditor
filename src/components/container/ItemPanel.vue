@@ -1,9 +1,11 @@
 <!--左侧画板-->
 
 <template>
-   <div class="PanelLeft">
+    <div class="panel_left">
        <ul>
-           <li><div id="circle">circle</div></li>
+           <li>
+               <div id="circle" ref="circle" draggable="true">circle</div>
+           </li>
            <li><div id="rect">rect</div></li>
        </ul>
    </div>
@@ -11,7 +13,15 @@
 
 <script>
     export default {
-        name: "PanelLeft"
+        name: "ItemPanel",
+        mounted () {
+            this.$refs.circle.ondragstart = this.dragstartHandler;
+        },
+        methods: {
+            dragstartHandler () {
+                console.log("开始拖动");
+            }
+        },
     }
 </script>
 
@@ -25,12 +35,11 @@ ul{
     margin: 0;
     padding: 0;
 }
-.PanelLeft{
-    position: absolute;
-    width:20%;
-    height:100vh;
-    /*border: 1px solid green;*/
+
+.panel_left {
+    width: 220px;
     background: #fafafa;
+    border-right: 1px solid #d0d0d0;
 }
 ul{
     display:flex;

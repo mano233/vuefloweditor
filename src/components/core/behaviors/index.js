@@ -12,6 +12,7 @@ G6.registerBehavior('click-add-node', {
         this.node = graph.addItem('node', {
             x: ev.x,
             y: ev.y,
+            id: G6.Util.uniqueId(),
         });
         console.log(this.node);
     },
@@ -27,7 +28,6 @@ G6.registerBehavior('click-add-edge', {
         };
     },
     onClick (ev) {
-        console.log(this);
         const node = ev.item;
         const graph = this.graph;
         const point = {x: ev.x, y: ev.y};
