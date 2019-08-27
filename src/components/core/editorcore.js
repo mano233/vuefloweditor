@@ -3,9 +3,10 @@ import './behaviors';
 
 export class Graph{
     constructor () {
-        this.instance = null;
+        //this.instance = null;
     }
 
+    static instance = null;
     addItem () {
 
     }
