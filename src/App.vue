@@ -2,6 +2,9 @@
     <div id="app">
         <div id="mountNode"></div>
         <button id="btn" @click="add">add</button>
+        <button  @click="addElement">添加元素</button>
+        <button  @click="addLine">添加线条</button>
+        <button  @click="deleteItem">删除元素</button>
     </div>
 </template>
 
@@ -12,20 +15,8 @@
     const g = new Graph();
 
     const data = {
-        nodes: [{
-            id:'node1',
-            x: 100,
-            y: 100,
-            shape: 'circle',
-            label: 'circle',
-        },{
-            id : 'node2',
-            x: 300,
-            y: 300,
-            shape: 'circle',
-            label: 'circle',
-        }],
-        // edges: []
+        nodes: [],
+        edges: []
     };
 
     export default {
@@ -47,12 +38,16 @@
                 width: 500,
                 height: 500,
                 modes: {
-                    default: ['drag-node', 'click-select', 'click-add-edge']
+                    default: ['drag-node', 'click-select'],
+                    addElement : ['drag-node','click-select','click-add-node'],
+                    addLine : ['drag-node','click-select','click-add-edge'],
+                    deleteItem : ['click-select','delete-add-node']
                 },
             });
             g.draw(data);
         },
         methods: {
+            //增加节点
             add () {
                 this.count += 20;
                 this.nodes.push({
@@ -62,6 +57,18 @@
                     label: 'circle',
                 })
             },
+            //切换模式(添加元素)
+            addElement(){
+                g.instance.setMode('addElement');
+            },
+            //切换模式(添加线条)
+            addLine(){
+                g.instance.setMode('addLine');
+            },
+            //删除节点
+            deleteItem(){
+                g.instance.setMode('deleteItem');
+            }
         }
     }
 </script>

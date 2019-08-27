@@ -1,5 +1,24 @@
 import G6 from '@antv/g6';
 
+//添加元素
+G6.registerBehavior('click-add-node', {
+    getEvents() {
+        return {
+            'canvas:click': 'onClick',
+        };
+    },
+    onClick(ev) {
+        console.log(ev);
+        const graph = this.graph;
+        this.node = graph.addItem('node', {
+            x: ev.x,
+            y: ev.y,
+            id: G6.Util.uniqueId()
+        });
+    },
+});
+
+//添加线条
 G6.registerBehavior('click-add-edge', {
     getEvents () {
         return {
@@ -44,6 +63,19 @@ G6.registerBehavior('click-add-edge', {
             this.edge = null;
             this.addingEdge = false;
         }
+    }
+});
+
+//删除元素
+G6.registerBehavior('delete-add-node', {
+    getEvents() {
+        return {
+            'node:click' : 'nodeClick'
+        };
+    },
+    nodeClick(ev){
+        console.log(ev);
+        this.graph.removeItem(ev.item);
     }
 });
 
