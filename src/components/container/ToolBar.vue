@@ -29,8 +29,7 @@
                 height: 500,
                 modes: {
                     default: ['drag-node', 'click-select'],
-                    addElementCircle : ['drag-node','click-select','click-add-node-circle'],
-                    addElementRect : ['drag-node','click-select','click-add-node-rect'],
+                    addElement: ['drag-node', 'click-select', 'click-add-node'],
                     addLine : ['drag-node','click-select','click-add-edge-line'],
                     addCurve : ['drag-node','click-select','click-add-edge-curve'],
                     deleteItem : ['click-select','delete-add-node']
@@ -40,11 +39,13 @@
         methods: {
             //切换模式(添加圆形元素)
             addElementCircle(){
-                g.setMode('addElementCircle');
+                g.setMode('addElement');
+                g.clickAddNode('circle');
             },
             //切换模式(添加方形元素)
             addElementRect(){
-                g.setMode('addElementRect');
+                g.setMode('addElement');
+                g.clickAddNode('rect');
             },
             //切换模式(添加直线)
             addLine(){

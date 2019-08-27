@@ -1,11 +1,11 @@
 import G6 from '@antv/g6';
-import './behaviors';
+import {clickAddNode} from './behaviors/handlers';
 
-export class Graph{
+export class Graph {
     constructor () {
         this.instance = null;
     }
-    static instance = null;
+
     /**
      *
      * @param canvasOptions
@@ -15,6 +15,7 @@ export class Graph{
         if (!this.instance) {
             this.instance = new G6.Graph(canvasOptions);
         }
+        this.instance.clickAddNode = clickAddNode.bind(this.instance);
         return this.instance;
     }
 
@@ -22,7 +23,7 @@ export class Graph{
      *
      * @param data
      */
-    static draw(data){
+    static draw (data) {
         if (!data) {
             throw new Error('data not fount');
         }

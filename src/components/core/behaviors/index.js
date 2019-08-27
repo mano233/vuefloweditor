@@ -1,38 +1,20 @@
 import G6 from '@antv/g6';
 
-//添加圆形元素
-G6.registerBehavior('click-add-node-circle', {
-    getEvents () {
-        return {
-            'canvas:click': 'onClick',
-        };
-    },
-    onClick (ev) {
-        const graph = this.graph;
-        this.node = graph.addItem('node', {
-            x: ev.x,
-            y: ev.y,
-            id: G6.Util.uniqueId(),
-            shape : 'circle'
-        });
-    },
-});
+// 暴露出去的回调函数
+let behaviorsCallBack = {
+    onClickAddNode: null,
+};
 
-//添加方形元素
-G6.registerBehavior('click-add-node-rect', {
+// 点击添加元素
+G6.registerBehavior('click-add-node', {
     getEvents () {
         return {
             'canvas:click': 'onClick',
         };
     },
     onClick (ev) {
-        const graph = this.graph;
-        this.node = graph.addItem('node', {
-            x: ev.x,
-            y: ev.y,
-            id: G6.Util.uniqueId(),
-            shape : 'rect'
-        });
+        // 利用回调函数操作，提高扩展性
+        behaviorsCallBack.onClickAddNode.call(this, ev);
     },
 });
 
@@ -148,4 +130,4 @@ G6.registerBehavior('delete-add-node', {
     }
 });
 
-
+export {behaviorsCallBack}
