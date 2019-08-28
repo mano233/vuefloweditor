@@ -6,6 +6,7 @@ export class Graph{
     //     this.instance = null;
     // }
     static instance = null;
+
     /**
      *
      * @param canvasOptions
@@ -15,9 +16,9 @@ export class Graph{
         if (!this.instance) {
             this.instance = new G6.Graph(canvasOptions);
         }
-
         return this.instance;
     }
+
     /**
      *
      * @param data
