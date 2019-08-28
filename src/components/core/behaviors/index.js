@@ -1,5 +1,57 @@
 import G6 from '@antv/g6';
 
+let list = ['#000'];
+
+//自定义图形
+G6.registerNode('diamond', {
+    draw(cfg, group) {
+        // 如果 cfg 中定义了 style 需要同这里的属性进行融合
+        const shape = group.addShape('path', {
+            attrs: {
+                path: this.getPath(cfg), // 因为增加了 update 所以要把共用方法提取出来
+                stroke: cfg.color // 颜色应用到边上，如果应用到填充，则使用 fill: cfg.color
+            }
+        });
+        if(cfg.label) { // 如果有文本
+            // 如果需要复杂的文本配置项，可以通过 labeCfg 传入
+            // const style = (cfg.labelCfg && cfg.labelCfg.style) || {};
+            // style.text = cfg.label;
+            group.addShape('text', {
+                // attrs: style
+                attrs: {
+                    x: 0, // 居中
+                    y: 0,
+                    textAlign: 'center',
+                    textBaseline: 'middle',
+                    text: cfg.label,
+                    fill: '#666'
+                }
+            });
+        }
+        return shape;
+    },
+    getPath() {
+        const path = [
+            ['M', 200, 100], // 右侧点
+            ['L', 100,200], // 下部
+            ['L', 200, 200], // 左侧
+            ['Z'] // 封闭
+        ];
+        return path;
+    },
+    update(cfg, node) {
+        const group = node.getContainer(); // 获取容器
+        const shape = group.get('children')[0]; // 按照添加的顺序
+        const style = {
+            path: this.getPath(),
+            stroke: cfg.color
+        };
+        shape.attr(style); // 更新属性
+        // 更新文本的逻辑类似，但是需要考虑 cfg.label 是否存在的问题
+        // 通过 label.attr() 更新文本属性即可
+    }
+});
+
 //添加圆形元素
 G6.registerBehavior('click-add-node-circle', {
     getEvents () {
@@ -8,13 +60,25 @@ G6.registerBehavior('click-add-node-circle', {
         };
     },
     onClick (ev) {
+        //如果数组长度大于1位，删除以为
+        if(list.length > 1){
+            list.shift();
+        }
+
+        console.log(list);
+
         const graph = this.graph;
         this.node = graph.addItem('node', {
             x: ev.x,
             y: ev.y,
             id: G6.Util.uniqueId(),
-            shape : 'circle'
+            shape : 'circle',
+            color : 'black',
+            style : {
+                fill:  list[0]
+            }
         });
+
     },
 });
 
@@ -26,12 +90,41 @@ G6.registerBehavior('click-add-node-rect', {
         };
     },
     onClick (ev) {
+        //如果数组长度大于1位，删除以为
+        if(list.length > 1){
+            list.shift();
+        }
+        console.log(list);
         const graph = this.graph;
         this.node = graph.addItem('node', {
             x: ev.x,
             y: ev.y,
             id: G6.Util.uniqueId(),
-            shape : 'rect'
+            shape : 'rect',
+            size : [70,50],
+            color : 'black',
+            style : {
+                fill:  list[0]
+            }
+        });
+
+    },
+});
+
+//添加三角形元素
+G6.registerBehavior('click-add-node-triangle', {
+    getEvents () {
+        return {
+            'canvas:click': 'onClick',
+        };
+    },
+    onClick (ev) {
+        const graph = this.graph;
+        this.node = graph.addItem('node', {
+            x: ev.x,
+            y: ev.y,
+            id: G6.Util.uniqueId(),
+            shape : 'diamond'
         });
     },
 });
@@ -147,5 +240,11 @@ G6.registerBehavior('delete-add-node', {
         this.graph.removeItem(ev.item);
     }
 });
+
+
+export default list;
+
+
+
 
 

@@ -2,9 +2,9 @@ import G6 from '@antv/g6';
 import './behaviors';
 
 export class Graph{
-    constructor () {
-        this.instance = null;
-    }
+    // constructor () {
+    //     this.instance = null;
+    // }
     static instance = null;
     /**
      *
@@ -15,9 +15,9 @@ export class Graph{
         if (!this.instance) {
             this.instance = new G6.Graph(canvasOptions);
         }
+
         return this.instance;
     }
-
     /**
      *
      * @param data
@@ -28,6 +28,11 @@ export class Graph{
         }
         this.instance.data(data);
         this.instance.render();
+    }
+
+    static clearCanvas(){
+        this.instance.clear();
+        this.instance.refresh();
     }
 }
 
