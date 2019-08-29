@@ -15,3 +15,4 @@ function clickAddNode (shape) {
 }
 
 export {clickAddNode};
+
