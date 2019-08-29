@@ -2,15 +2,10 @@ import G6 from '@antv/g6';
 import './behaviors';
 
 export class Graph{
-    // constructor () {
-    //     this.instance = null;
-    // }
     static instance = null;
-
     /**
      *
-     * @param canvasOptions
-     * @returns {null|{"node:click": string, mousemove: string, "edge:click": string}}
+     * @param {Object} canvasOptions
      */
     static init (canvasOptions) {
         if (!this.instance) {
