@@ -1,5 +1,5 @@
 import {behaviorsCallBack} from './index';
-import G6 from '@antv/g6';
+import {Util} from '@antv/g6/src';
 
 // behaviors中用的到具体回调函数
 function clickAddNode (shape) {
@@ -8,7 +8,7 @@ function clickAddNode (shape) {
         this.node = graph.addItem('node', {
             x: ev.x,
             y: ev.y,
-            id: G6.Util.uniqueId(),
+            id: Util.uniqueId(),
             shape,
         });
     };

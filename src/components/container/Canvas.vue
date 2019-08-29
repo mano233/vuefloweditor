@@ -9,16 +9,10 @@
         name: "Canvas",
         components : {},
         mounted () {
-            const canvas = document.getElementById('mountNode');
-
-            canvas.ondrop = function (e) {
-                e.preventDefault();
-                console.log('放入了一个圆');
-            }
-            canvas.ondragover = function (e) {
-                // 必须阻止ondragover的原生事件，ondrop事件才可触发
-                e.preventDefault();
-            }
+            this.$store.commit('init');
+        },
+        beforeDestroy () {
+            this.$store.commit('destroy',this.$g);
         }
     }
 </script>

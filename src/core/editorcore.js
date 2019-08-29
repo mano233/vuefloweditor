@@ -1,5 +1,6 @@
-import G6 from '@antv/g6';
-import {clickAddNode} from './behaviors/handlers';
+import G6 from '@antv/g6/src';
+import {clickAddNode} from './register/behaviors/handlers';
+import {register} from './register';
 
 export class Graph {
     constructor () {
@@ -15,6 +16,7 @@ export class Graph {
         if (!this.instance) {
             this.instance = new G6.Graph(canvasOptions);
         }
+        register(G6);
         this.instance.clickAddNode = clickAddNode.bind(this.instance);
         return this.instance;
     }

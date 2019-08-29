@@ -20,6 +20,7 @@
     import ToolBar from './components/container/ToolBar';
     import Details from './components/container/Details.vue';
 
+
     export default {
         name: 'app',
         components : {
@@ -27,6 +28,9 @@
             Canvas,
             Details,
             ToolBar
+        },
+        beforeDestroy () {
+
         }
     }
 </script>

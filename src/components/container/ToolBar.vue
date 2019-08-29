@@ -12,9 +12,6 @@
 </template>
 
 <script>
-    import {Graph} from "@/components/core/editorcore";
-    let g = null;
-
     export default {
         name: "ToolBar",
         data () {
@@ -22,42 +19,28 @@
                 count: 1,
             }
         },
-        mounted () {
-            g = Graph.init({
-                container: document.getElementById('mountNode'),
-                width: 500,
-                height: 500,
-                modes: {
-                    default: ['drag-node', 'click-select'],
-                    addElement: ['drag-node', 'click-select', 'click-add-node'],
-                    addLine : ['drag-node','click-select','click-add-edge-line'],
-                    addCurve : ['drag-node','click-select','click-add-edge-curve'],
-                    deleteItem : ['click-select','delete-add-node']
-                },
-            });
-        },
         methods: {
             //切换模式(添加圆形元素)
             addElementCircle(){
-                g.setMode('addElement');
-                g.clickAddNode('circle');
+                this.$g.setMode('addElement');
+                this.$g.clickAddNode('task-node');
             },
             //切换模式(添加方形元素)
             addElementRect(){
-                g.setMode('addElement');
-                g.clickAddNode('rect');
+                this.$g.setMode('addElement');
+                this.$g.clickAddNode('rect');
             },
             //切换模式(添加直线)
             addLine(){
-                g.setMode('addLine');
+                this.$g.setMode('addLine');
             },
             //切换模式(添加曲线)
             addCurve(){
-                g.setMode('addCurve');
+                this.$g.setMode('addCurve');
             },
             //删除节点
             deleteItem(){
-                g.setMode('deleteItem');
+                this.$g.setMode('deleteItem');
             }
         }
     }
