@@ -5,9 +5,8 @@
             <div class="edit-head">
                 <span>Node</span>
             </div>
-            <div class="edit-body">
+            <div class="edit-body" >
                 <a-form>
-
                     <!--编辑-->
                     <a-form-item label="label">
                         <a-input id="label" v-model="newData" @change="changeData" />
@@ -42,6 +41,7 @@
                 Graph : '',
                 width : '',
                 height : '',
+                showView : false
             };
         },
         computed : {
@@ -54,10 +54,10 @@
                 if(labelArr.length > 1) {
                     labelArr.shift();
                 }
+                // console.log(labelArr);
             },
             //添加节点
             copyNode(){
-
                 this.Graph = ToolBar.methods.init();
 
                 this.Graph.node = this.Graph.addItem('node', {
@@ -107,6 +107,7 @@
     .edit-body{
         margin-top: 20px;
         text-align: center;
+        display: none;
     }
 
 </style>

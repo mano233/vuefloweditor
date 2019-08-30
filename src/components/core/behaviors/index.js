@@ -1,5 +1,6 @@
 import G6 from '@antv/g6';
 import ToolBar from '../../container/ToolBar'
+import Details from '../../container/Details'
 
 
 let list = ['#000'];
@@ -130,7 +131,8 @@ G6.registerBehavior('click-add-node-circle', {
         if(list.length > 1){
             list.shift();
         }
-        console.log(this);
+
+
 
         const graph = this.graph;
         this.node = graph.addItem('node', {
@@ -146,19 +148,9 @@ G6.registerBehavior('click-add-node-circle', {
 
     },
     nodeClick(ev){
-
-        // deleteArr = [];
-
-        // if(deleteArr.length > 1){
-        //     deleteArr.shift();
-        // }else{
-
-
-
         deleteArr.push(ev);
 
-
-        console.log(deleteArr);
+        document.getElementsByClassName('edit-body')[0].style.display = 'block';
 
         let {label} = ev.item._cfg.model;
         if(labelArr.length >= 1) {
@@ -172,8 +164,11 @@ G6.registerBehavior('click-add-node-circle', {
         labels.value = label;
 
     },
-    onKeyup(e){
-        this.node._cfg.model.label = e.target.value;
+    onKeyup(ev){
+
+        this.node._cfg.model.label = ev.target.value;
+
+        this.graph.refresh();
     }
 
 
