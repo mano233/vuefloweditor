@@ -1,6 +1,12 @@
 import G6 from '@antv/g6';
+import ToolBar from '../../container/ToolBar'
+
 
 let list = ['#000'];
+
+let labelArr = ['开始'];
+
+let deleteArr = [];
 
 //自定义图形
 G6.registerNode('diamond', {
@@ -29,7 +35,7 @@ G6.registerNode('diamond', {
                     textAlign: 'center',
                     textBaseline: 'middle',
                     text: cfg.label,
-                    fill: 'red'
+                    fill: '#fff'
                 }
             });
         }
@@ -57,11 +63,66 @@ G6.registerNode('diamond', {
     }
 });
 
+//自定义圆形
+G6.registerNode('textCircle', {
+    draw(cfg, group) {
+        const circle = group.addShape('circle', {
+            attrs: {
+                x: 0,
+                y: 0,
+                r: 30,
+                stroke: '#444',
+                fill: list[0]
+            }
+        });
+        const text = group.addShape('text', {
+            attrs: {
+                x: 0,
+                y: 0,
+                textAlign: 'center',
+                text: cfg.label,
+                textBaseline: 'middle',
+                fill: '#fff'
+            }
+        });
+        return circle;
+    }
+});
+
+//自定义矩形
+G6.registerNode('textRect', {
+    draw(cfg, group) {
+        const circle = group.addShape('rect', {
+            attrs: {
+                x : -35,
+                y : -25,
+                width: 70,
+                height: 50,
+                stroke: '#444',
+                fill : list[0]
+            }
+        });
+        const text = group.addShape('text', {
+            attrs: {
+                x: 0,
+                y: 0,
+                textAlign: 'center',
+                text: cfg.label,
+                textBaseline: 'middle',
+                fill: '#fff'
+            }
+        });
+        return circle;
+    }
+});
+
 //添加圆形元素
 G6.registerBehavior('click-add-node-circle', {
     getEvents () {
         return {
             'canvas:click': 'onClick',
+            'node:click' : 'nodeClick',
+            'keyup' : 'onKeyup'
         };
     },
     onClick (ev) {
@@ -69,22 +130,53 @@ G6.registerBehavior('click-add-node-circle', {
         if(list.length > 1){
             list.shift();
         }
-
-        console.log(list);
+        console.log(this);
 
         const graph = this.graph;
         this.node = graph.addItem('node', {
             x: ev.x,
             y: ev.y,
             id: G6.Util.uniqueId(),
-            shape : 'circle',
-            color : 'black',
+            label : labelArr[0],
+            shape : 'textCircle',
             style : {
-                fill:  list[0]
+                fill:  list[0],
             }
         });
 
     },
+    nodeClick(ev){
+
+        // deleteArr = [];
+
+        // if(deleteArr.length > 1){
+        //     deleteArr.shift();
+        // }else{
+
+
+
+        deleteArr.push(ev);
+
+
+        console.log(deleteArr);
+
+        let {label} = ev.item._cfg.model;
+        if(labelArr.length >= 1) {
+            labelArr.shift();
+        }
+
+        labelArr.push(label)
+
+        // //写入值
+        var labels = document.getElementById('label');
+        labels.value = label;
+
+    },
+    onKeyup(e){
+        this.node._cfg.model.label = e.target.value;
+    }
+
+
 });
 
 //添加方形元素
@@ -105,9 +197,8 @@ G6.registerBehavior('click-add-node-rect', {
             x: ev.x,
             y: ev.y,
             id: G6.Util.uniqueId(),
-            shape : 'rect',
-            size : [70,50],
-            color : 'black',
+            shape : 'textRect',
+            label  : '矩形',
             style : {
                 fill:  list[0]
             }
@@ -130,6 +221,7 @@ G6.registerBehavior('click-add-node-triangle', {
             y: ev.y,
             id: G6.Util.uniqueId(),
             shape : 'diamond',
+            label : '开始',
         });
     },
 });
@@ -316,19 +408,22 @@ G6.registerBehavior('click-add-edge-curve', {
 G6.registerBehavior('delete-add-node', {
     getEvents () {
         return {
-            'node:click': 'nodeClick'
+            'node:click': 'nodeClick',
         };
     },
     nodeClick (ev) {
         console.log(ev);
         this.graph.removeItem(ev.item);
-    }
+    },
 });
 
 
 
-
-export default list;
+export default {
+    list,
+    labelArr,
+    deleteArr
+}
 
 
 

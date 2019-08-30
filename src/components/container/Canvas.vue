@@ -28,9 +28,10 @@
 
                 console.log('放入了一个圆');
 
+                list = list.list;
+
                 list.push(ToolBar);
 
-                console.log(list);
 
                 this.Graph = list[1].methods.init();
 

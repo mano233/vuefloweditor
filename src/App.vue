@@ -6,7 +6,7 @@
         </div>
         <!--文本-->
         <div class="context">
-            <ItemPanel></ItemPanel>
+            <PanelLeft></PanelLeft>
             <Canvas></Canvas>
             <Details></Details>
         </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import ItemPanel from './components/container/ItemPanel';
+    import PanelLeft from './components/container/PanelLeft';
     import Canvas from './components/container/Canvas';
     import ToolBar from './components/container/ToolBar';
     import Details from './components/container/Details.vue';
@@ -23,10 +23,10 @@
     export default {
         name: 'app',
         components : {
-            ItemPanel,
+            PanelLeft,
             Canvas,
             Details,
-            ToolBar
+            ToolBar,
         }
     }
 </script>

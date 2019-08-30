@@ -87,7 +87,8 @@
             },
             //改变颜色
             changeColor(){
-                list.push('#'+Math.random().toString().substring(8,14))
+                console.log(list);
+                list.list.push('#'+Math.random().toString().substring(8,14))
             },
             //清空画板
             clearCanvas(){
@@ -109,9 +110,41 @@
                     edgesArr.push(ele._cfg.model);
                 })
 
-
                 console.log(nodesArr)
                 console.log(edgesArr)
+
+                let nodeObj = {};
+                let edgeObj = {};
+                let newArrNode = [];
+                let newArrEdge = [];
+
+                nodesArr.forEach(function (ele) {
+                    nodeObj = {
+                        id : ele.id,
+                        x : ele.x,
+                        y : ele.y,
+                        shape : ele.shape,
+                        label : ele.label,
+                        style : ele.style
+                    }
+                    newArrNode.push(nodeObj);
+                })
+
+                edgesArr.forEach(function (ele) {
+                    edgeObj = {
+                        source: ele.source,
+                        target: ele.target,
+                        shape : ele.shape,
+                    }
+                    newArrEdge.push(edgeObj);
+                })
+
+                let result = {
+                    'edges': JSON.stringify(newArrEdge),
+                    'nodes' : JSON.stringify(newArrNode),
+                }
+
+                console.log(result)
             }
         }
     }
