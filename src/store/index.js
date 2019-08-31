@@ -8,21 +8,23 @@ export default new Vuex.Store({
     },
     mutations: {
         init(){
-            Vue.prototype.$g = Graph.init({
+            const g = Graph.init({
                 container: document.getElementById('mountNode'),
                 width: 500,
                 height: 500,
                 modes: {
                     default: ['drag-node', 'click-select'],
-                    addElement: ['drag-node', 'click-select', 'click-add-node','hoverNodeActived','dragEdge'],
-                    addLine : ['drag-node','click-select','click-add-edge-line'],
-                    addCurve : ['drag-node','click-select','click-add-edge-curve'],
+                    addElement: ['drag-node', 'clickSelected', 'click-add-node','hoverNodeActived','dragEdge'],
                     deleteItem : ['click-select','delete-add-node']
                 },
                 defaultEdge: {
                     shape: 'flow-polyline-round',
                 },
             });
+            Vue.prototype.$g = g;
+            g.on('afteritemselected',(e)=>{
+                console.log(e);
+            })
         },
         destroy(state,g){
             g.destroy();
