@@ -19,6 +19,9 @@ export default new Vuex.Store({
                     addCurve : ['drag-node','click-select','click-add-edge-curve'],
                     deleteItem : ['click-select','delete-add-node']
                 },
+                defaultEdge: {
+                    shape: 'flow-polyline-round',
+                },
             });
         },
         destroy(state,g){
