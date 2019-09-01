@@ -180,7 +180,7 @@ G6.registerBehavior('click-add-node-circle', {
             addArr.shift();
         }
 
-        addArr.push(this);
+        addArr.push(id);
 
 
         // //写入值

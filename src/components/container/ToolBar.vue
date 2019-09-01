@@ -27,7 +27,8 @@
         data () {
             return {
                 count: 1,
-                data : null
+                data : null,
+                color : "#000"
             }
         },
         mounted () {

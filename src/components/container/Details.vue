@@ -20,8 +20,10 @@
                     <!--高度-->
                     <a-form-item label="height">
                         <a-input id="height" v-model="heightData"  />
+
                     </a-form-item>
 
+                    <colorPicker style="z-index: 999" v-model="color" />
 
                     <!--半径-->
                     <a-form-item label="radius">
@@ -62,7 +64,8 @@
                 Graph : '',
                 width : '',
                 height : '',
-                showView : false
+                showView : false,
+                color : "#000"
             };
         },
         computed : {
@@ -90,22 +93,25 @@
                         fill: list[0],
                     }
                 });
-                const node2 = this.Graph.addItem('node', {
-                    x: Math.ceil(Math.random() * 1000),
-                    y: Math.ceil(Math.random() * 500),
-                    id: G6.Util.uniqueId(),
-                    label: '开始',
-                    shape: 'textCircle',
-                    style: {
-                        fill: list[0],
-                    }
-                });
-                // console.log(list.addArr[0].node._cfg.id)
-                // console.log(this.Graph.node._cfg.id)
+
+                // console.log(list.addArr)
+
+                // const node2 = this.Graph.addItem('node', {
+                //     x: Math.ceil(Math.random() * 1000),
+                //     y: Math.ceil(Math.random() * 500),
+                //     id: G6.Util.uniqueId(),
+                //     label: '开始',
+                //     shape: 'textCircle',
+                //     style: {
+                //         fill: list[0],
+                //     }
+                // });
+
+
 
                 this.Graph.addItem('edge', {
-                    source:node1._cfg.id,
-                    target:node2._cfg.id,
+                    source:list.addArr[0],
+                    target:node1._cfg.id,
                     shape : 'line',
                     id : G6.Util.uniqueId(),
                 });
@@ -158,9 +164,8 @@
             },
             //复制节点
             copyNode(){
-                this.Graph = ToolBar.methods.init();
-
-                this.Graph.node = this.Graph.addItem('node', {
+                this.Graph = this.$root.$g;
+                this.Graph.addItem('node', {
                     x: Math.ceil(Math.random()*1000),
                     y: Math.ceil(Math.random()*500),
                     id: G6.Util.uniqueId(),
@@ -178,7 +183,7 @@
                     list.deleteArr.shift();
                 }
 
-                this.Graph = ToolBar.methods.init();
+                this.Graph = this.$root.$g;
 
 
                 this.Graph.removeItem(list.deleteArr[0].item)
@@ -205,8 +210,11 @@
     }
     .edit-body{
         margin-top: 20px;
-        text-align: center;
+        /*text-align: center;*/
         /*display: none;*/
+    }
+    .m-colorPicker .box{
+        left: -90px;
     }
 
 </style>
