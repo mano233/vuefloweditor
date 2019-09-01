@@ -21,7 +21,7 @@ export function registerNode(G6){
     G6.Shape.registerFactory('anchor', {
         defaultShapeType: 'marker'
     });
-    G6.Shape.registerAnchor('single-anchor', Util.mix({}, SingleShapeMixin, {
+    G6.Shape.registerAnchor('single-anchor', Util.mix({}, SingleShapeMixin,{
         itemType: 'anchor',
 
         drawShape(cfg, group) {
@@ -267,4 +267,9 @@ export function registerNode(G6){
             return style;
         }
     }, 'base-node');
+
+
+
+
 }
+

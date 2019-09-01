@@ -23,7 +23,7 @@
             //切换模式(添加圆形元素)
             addElementCircle(){
                 this.$g.setMode('addElement');
-                this.$g.clickAddNode('task-node');
+                this.$g.clickAddNode('base-node');
             },
             //切换模式(添加方形元素)
             addElementRect(){

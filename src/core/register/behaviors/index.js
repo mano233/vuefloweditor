@@ -13,8 +13,12 @@ function registerBehavior(G6){
             };
         },
         onClick (ev) {
+            // const  aaa= this;
+            console.log(this);
+
+
             // 利用回调函数操作，提高扩展性
-            behaviorsCallBack.onClickAddNode.call(this, ev);
+            behaviorsCallBack.onClickAddNode.call(this,ev);
         },
     });
 
@@ -139,7 +143,7 @@ function registerBehavior(G6){
         getEvents() {
             return {
                 'node:click': 'onClick',
-                'edge:click': 'onClick',
+                // 'edge:click': 'onClick1',
                 'edge:mouseover': 'onEdgeMouseOver',
                 'edge:mouseleave': 'onEdgeMouseLeave',
                 'canvas:click': 'onCanvasClick',
@@ -147,14 +151,14 @@ function registerBehavior(G6){
             }
         },
         onClick(e) {
-            this._clearSelected();
-            this.graph.setItemState(e.item, 'selected', true);
-            let selectedItems = this.graph.get('selectedItems');
-            if(!selectedItems)
-                selectedItems = [];
-            selectedItems = [e.item.get('id')];
-            this.graph.set('selectedItems',selectedItems);
-            this.graph.emit('afteritemselected',selectedItems);
+            // this._clearSelected();
+            // this.graph.setItemState(e.item, 'selected', true);
+            // let selectedItems = this.graph.get('selectedItems');
+            // if(!selectedItems)
+            //     selectedItems = [];
+            // selectedItems = [e.item.get('id')];
+            // this.graph.set('selectedItems',selectedItems);
+            this.graph.emit('afteritemselected',e.item);
         },
         onNodeMouseOver(e){
             if(this.graph.getCurrentMode() === 'edit')
@@ -171,7 +175,7 @@ function registerBehavior(G6){
                 this.graph.setItemState(e.item, 'hover', false);
         },
         onCanvasClick(){
-            this._clearSelected();
+            // this._clearSelected();
         },
         _clearSelected(){
             let selected = this.graph.findAllByState('node', 'selected');
@@ -221,7 +225,7 @@ function registerBehavior(G6){
             };
         },
         getEvents() {
-            debugger
+            // debugger
             return {
                 'anchor:dragstart': 'onDragStart',
                 'anchor:drag': 'onDrag',
@@ -356,6 +360,8 @@ function registerBehavior(G6){
             }
         }
     });
+
+
 }
 
 

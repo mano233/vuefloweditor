@@ -1,9 +1,12 @@
 import {behaviorsCallBack} from './index';
 import {Util} from '@antv/g6/src';
 
+
 // behaviors中用的到具体回调函数
 function clickAddNode (shape) {
+
     behaviorsCallBack.onClickAddNode = function (ev) {
+        console.log(this);
         const graph = this.graph;
         this.node = graph.addItem('node', {
             x: ev.x,
@@ -13,6 +16,8 @@ function clickAddNode (shape) {
         });
     };
 }
+
+
 
 export {clickAddNode};
 

@@ -12,13 +12,14 @@
             this.$store.commit('init');
         },
         beforeDestroy () {
+            // canvas
             this.$store.commit('destroy',this.$g);
         }
     }
 </script>
 
 
-<style>
+<style scoped>
     canvas {
         border: 1px solid red;
     }
