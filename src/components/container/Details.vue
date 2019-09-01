@@ -51,7 +51,6 @@
     import list from '../core/behaviors/index';
     import ToolBar from './ToolBar'
     import G6 from '@antv/g6';
-    import {Graph} from "../core/editorcore";
 
     export default {
         data () {
@@ -80,33 +79,36 @@
             },
             //添加节点
             addNode: function () {
-                console.log(this.$root.$g);
-                console.log(list.addArr);
-
                 this.Graph = this.$root.$g;
-
-                console.log(this.Graph);
-
-                // this.Graph.addItem('node', {
-                //     x: Math.ceil(Math.random() * 1000),
-                //     y: Math.ceil(Math.random() * 500),
-                //     id: G6.Util.uniqueId(),
-                //     label: '开始',
-                //     shape: 'textCircle',
-                //     style: {
-                //         fill: list[0],
-                //     }
-                // });
-
+                const node1 = this.Graph.addItem('node', {
+                    x: Math.ceil(Math.random() * 1000),
+                    y: Math.ceil(Math.random() * 500),
+                    id: G6.Util.uniqueId(),
+                    label: '开始',
+                    shape: 'textCircle',
+                    style: {
+                        fill: list[0],
+                    }
+                });
+                const node2 = this.Graph.addItem('node', {
+                    x: Math.ceil(Math.random() * 1000),
+                    y: Math.ceil(Math.random() * 500),
+                    id: G6.Util.uniqueId(),
+                    label: '开始',
+                    shape: 'textCircle',
+                    style: {
+                        fill: list[0],
+                    }
+                });
                 // console.log(list.addArr[0].node._cfg.id)
                 // console.log(this.Graph.node._cfg.id)
 
-                // this.Graph.addItem('edge', {
-                //     source:list.addArr[0].graph.node._cfg.id,
-                //     target:this.Graph.node._cfg.id,
-                //     shape : 'line',
-                //     id : G6.Util.uniqueId(),
-                // });
+                this.Graph.addItem('edge', {
+                    source:node1._cfg.id,
+                    target:node2._cfg.id,
+                    shape : 'line',
+                    id : G6.Util.uniqueId(),
+                });
 
                 // console.log(this.Graph);
 
