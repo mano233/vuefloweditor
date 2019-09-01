@@ -80,10 +80,10 @@
             },
             //添加节点
             addNode: function () {
-
+                console.log(this.$root.$g);
                 console.log(list.addArr);
-                
-                this.Graph = this.$g;
+
+                this.Graph = this.$root.$g;
 
                 console.log(this.Graph);
 
@@ -97,8 +97,8 @@
                 //         fill: list[0],
                 //     }
                 // });
-                
-                console.log(list.addArr[0].node._cfg.id)
+
+                // console.log(list.addArr[0].node._cfg.id)
                 // console.log(this.Graph.node._cfg.id)
 
                 // this.Graph.addItem('edge', {
@@ -148,7 +148,7 @@
 
                 //添加节点addItem,model{x y}
                 //添加线条addEdge，model(souce起始点（id），taget结束的点(id))
-                
+
                 // this.Graph.data(data);
                 // this.Graph.render();
 

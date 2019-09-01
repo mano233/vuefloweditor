@@ -41,8 +41,7 @@
                 let num = document.getElementById('mountNode').children.length;
                 //避免添加多个canvas
                 if(num <= 0){
-                    
-                    this.$g = Graph.init({
+                     this.$root.$g = Graph.init({
                         container: document.getElementById('mountNode'),
                         width: 1000,
                         height: 500,
@@ -57,7 +56,7 @@
                             deleteItem : ['click-select','delete-add-node']
                         },
                     });
-                    g= this.$g;
+                    g = this.$root.$g;
                 }
             },
             //切换模式(添加圆形元素)
