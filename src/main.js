@@ -4,7 +4,7 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css'
 
 Vue.config.productionTip = false;
-
+Vue.prototype.$g = {};
 Vue.use(Antd);
 
 new Vue({

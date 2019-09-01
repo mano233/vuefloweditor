@@ -9,6 +9,12 @@ let labelArr = ['开始'];
 
 let deleteArr = [];
 
+let addArr = [];
+
+let addArr1 = [];
+
+let circleSize = 40;
+
 //自定义图形
 G6.registerNode('diamond', {
     draw(cfg, group) {
@@ -71,7 +77,7 @@ G6.registerNode('textCircle', {
             attrs: {
                 x: 0,
                 y: 0,
-                r: 30,
+                r: circleSize,
                 stroke: '#444',
                 fill: list[0]
             }
@@ -140,7 +146,9 @@ G6.registerBehavior('click-add-node-circle', {
             y: ev.y,
             id: G6.Util.uniqueId(),
             label : labelArr[0],
+            size : circleSize,
             shape : 'textCircle',
+
             style : {
                 fill:  list[0],
             }
@@ -148,27 +156,53 @@ G6.registerBehavior('click-add-node-circle', {
 
     },
     nodeClick(ev){
+
+        console.log(ev);
+
         deleteArr.push(ev);
 
         document.getElementsByClassName('edit-body')[0].style.display = 'block';
 
         let {label} = ev.item._cfg.model;
+        let {id} = ev.item._cfg.model;
+        let {size} = ev.item._cfg.model;
+
+        addArr1.push(this);
+
         if(labelArr.length >= 1) {
             labelArr.shift();
         }
 
         labelArr.push(label)
 
+
+        if(addArr.length >= 1) {
+            addArr.shift();
+        }
+
+        addArr.push(this);
+
+
         // //写入值
         var labels = document.getElementById('label');
         labels.value = label;
 
+        var radius = document.getElementById('radius');
+        radius.value = size;
+
+
     },
     onKeyup(ev){
 
+
         this.node._cfg.model.label = ev.target.value;
 
+        // circleSize = document.getElementById('radius').value
+
+
         this.graph.refresh();
+
+
     }
 
 
@@ -417,7 +451,9 @@ G6.registerBehavior('delete-add-node', {
 export default {
     list,
     labelArr,
-    deleteArr
+    deleteArr,
+    addArr,
+    addArr1,
 }
 
 

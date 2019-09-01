@@ -41,7 +41,8 @@
                 let num = document.getElementById('mountNode').children.length;
                 //避免添加多个canvas
                 if(num <= 0){
-                    g = Graph.init({
+                    
+                    this.$g = Graph.init({
                         container: document.getElementById('mountNode'),
                         width: 1000,
                         height: 500,
@@ -56,8 +57,8 @@
                             deleteItem : ['click-select','delete-add-node']
                         },
                     });
+                    g= this.$g;
                 }
-                    return g;
             },
             //切换模式(添加圆形元素)
             addElementCircle(){
@@ -101,6 +102,9 @@
 
                 let {nodes} = g._cfg; //节点
                 let {edges} = g._cfg; //线条
+
+                console.log(nodes);
+                console.log(edges);
 
                 nodes.forEach(function (ele) {
                     nodesArr.push(ele._cfg.model);
