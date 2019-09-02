@@ -2,7 +2,7 @@ import editorStyle from "@/config/defaultStyle";
 import _ from 'lodash';
 
 export function registerEdge(G6){
-    //自定义
+    //自定义线条
     G6.registerEdge('flow-polyline-round', {
         drawShape(cfg, group) {
             this.group = group;

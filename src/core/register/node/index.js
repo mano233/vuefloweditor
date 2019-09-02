@@ -1,7 +1,10 @@
 import editorStyle from "@/config/defaultStyle";
+import store from '../../../store'
 const Item = require('@antv/g6/src/item/item');
 const SingleShapeMixin = require('@antv/g6/src/shape/single-shape-mixin');
 const Util = require('@antv/g6/src/util');
+
+
 
 const dashArray = [
     [0,1],
@@ -18,6 +21,7 @@ const interval = 9;
 const lineDash = [4, 2, 1, 2];
 
 export function registerNode(G6){
+    //注册锚点
     G6.Shape.registerFactory('anchor', {
         defaultShapeType: 'marker'
     });
@@ -269,6 +273,59 @@ export function registerNode(G6){
     }, 'base-node');
 
 
+
+    //重写圆形（目的：系统自带的圆形不能自定义文字颜色和尺寸）
+    G6.registerNode('RewriteCircle', {
+        draw(cfg, group) {
+            const circle = group.addShape('circle', {
+                attrs: {
+                    x: 0,
+                    y: 0,
+                    r: store.getters.circleRadius, //半径
+                    stroke: store.getters.strokeColor, //线条颜色
+                    fill: store.getters.defaultBckColor //背景颜色
+                }
+            });
+           group.addShape('text', {
+                attrs: {
+                    x: 0,
+                    y: 0,
+                    textAlign: 'center',
+                    text: cfg.label,
+                    textBaseline: 'middle',
+                    fill: store.getters.defaultTextColor //文本颜色
+                }
+            });
+            return circle;
+        }
+    });
+
+    //重写正多边形（目的：系统自带的圆形不能自定义文字颜色和尺寸）
+    G6.registerNode('RewriteRect', {
+        draw(cfg, group) {
+            const rect = group.addShape('rect', {
+                attrs: {
+                    x : 0,
+                    y : 0,
+                    width: store.getters.polygonWidth, //宽度
+                    height: store.getters.polygonHeight, //高度
+                    stroke: store.getters.strokeColor, //线条颜色
+                    fill : store.getters.defaultBckColor //背景颜色
+                }
+            });
+            group.addShape('text', {
+                attrs: {
+                    x: 0,
+                    y: 0,
+                    textAlign: 'center',
+                    text: cfg.label,
+                    textBaseline: 'middle',
+                    fill: store.getters.defaultTextColor //文本颜色
+                }
+            });
+            return rect;
+        }
+    });
 
 
 }

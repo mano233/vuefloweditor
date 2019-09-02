@@ -1,5 +1,4 @@
 import G6 from '@antv/g6/src';
-import {clickAddNode} from './register/behaviors/handlers';
 import {register} from './register';
 
 
@@ -15,15 +14,16 @@ export class Graph {
 
     /**
      * init-> register(node edge behaviors)
+     * @private
      * @param canvasOptions
-     * @returns {null|{"node:click": string, mousemove: string, "edge:click": string}}
+     * @returns {null}
      */
      _init (canvasOptions) {
         if (!this.instance) {
             register(G6);
             this.instance = new G6.Graph(canvasOptions);
         }
-        this.instance.clickAddNode = clickAddNode.bind(this.instance);
+
         return this.instance;
     }
 
@@ -37,6 +37,15 @@ export class Graph {
         }
         this.instance.data(data);
         this.instance.render();
+    }
+
+    /**
+     * 清空画板
+     * @private
+     */
+     _clearCanvas(item){
+        item.clear();
+        item.refresh();
     }
 }
 
