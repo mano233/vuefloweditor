@@ -49,8 +49,6 @@ export function registerNode(G6){
     }));
     G6.Shape.registerAnchor('marker',{ shapeType:'marker' },'single-anchor');
     G6.registerNode('base-node', {
-        icon: null,
-        iconWidth: 14,
         selectedColor: '#eee',
         unSelectedColor: '#f9f9f9',
         borderColor: '#bbb',
@@ -118,38 +116,6 @@ export function registerNode(G6){
                     ...style,
                 }
             });
-            if(cfg.icon){
-                let attrs = {
-                    x: style.x + cfg.iconPaddingLeft,
-                    y: style.y + cfg.iconPaddingTop,
-                    width: cfg.iconWidth,
-                    height: cfg.iconHeight,
-                };
-                if(shapeType === 'circle'){
-                    attrs = {
-                        x: style.x- style.r + cfg.iconPaddingLeft,
-                        y: style.y - style.r + cfg.iconPaddingTop,
-                        width: cfg.iconWidth,
-                        height: cfg.iconHeight,
-                    }
-                }else if(shapeType === 'path'){
-                    attrs = {
-                        x: cfg.iconPaddingLeft,
-                        y: cfg.iconPaddingTop,
-                        width: cfg.iconWidth,
-                        height: cfg.iconHeight,
-                    }
-                }
-                group.icon = group.addShape('image', {
-                    attrs: {
-                        img:cfg.icon,
-                        ...attrs,
-                    }
-                });
-                if(cfg.hideIcon){
-                    group.icon.hide();
-                }
-            }
             group.anchorShapes = [];
             group.showAnchor = (group) => {
                 this.drawAnchor(group);
@@ -237,11 +203,6 @@ export function registerNode(G6){
         initStyle(cfg){
             cfg.selectedColor = this.selectedColor;
             cfg.unSelectedColor = this.unSelectedColor;
-            cfg.icon = this.icon;
-            cfg.iconWidth = this.iconWidth;
-            cfg.iconHeight = this.iconHeight;
-            cfg.iconPaddingTop = this.iconPaddingTop;
-            cfg.iconPaddingLeft = this.iconPaddingLeft;
             return cfg;
         },
     }, 'single-shape');
@@ -250,10 +211,6 @@ export function registerNode(G6){
         selectedColor: '#95D6FB',
         unSelectedColor: '#E7F7FE',
         borderColor: '#1890FF',
-        iconWidth: 12,
-        iconHeight: 12,
-        iconPaddingLeft: 2,
-        iconPaddingTop: 2,
         getShapeStyle(cfg) {
             cfg.size = [80, 44];
             cfg = this.initStyle(cfg);
@@ -278,10 +235,6 @@ export function registerNode(G6){
         unSelectedColor: '#FEF7E8',
         borderColor: '#FA8C16',
         labelPosition: 'center',
-        iconWidth: 18,
-        iconHeight: 18,
-        iconPaddingLeft: 6,
-        iconPaddingTop: 6,
         getShapeStyle(cfg) {
           cfg.size = [30, 30];
           cfg = this.initStyle(cfg);

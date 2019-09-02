@@ -25,27 +25,14 @@ function registerBehavior(G6){
             store.commit('SET_SHOWVIEW',false)
         },
         //点击节点
-        nodeClick(ev){
+        nodeClick(e){
+
             //传参
-            store.commit('SET_ITEMNODE',ev.item);
-
-            console.log(ev.item);
-
+            // store.commit('SET_ITEMNODE',ev.item);
             //点击节点编辑内容
-            store.commit('SET_SHOWVIEW',true);
-
+            // store.commit('SET_SHOWVIEW',true);
             //判断点击的形状
-            let shape = ev.item._cfg.keyShape._cfg.type;
-
-            if(shape == 'circle'){ //圆形
-                //展示半径隐藏宽高
-                store.commit('SET_SHOWVH',false);
-                store.commit('SET_SHOWRADIUS',true);
-            }else if(shape == 'rect'){ //矩形
-                //展示宽高隐藏半径
-                store.commit('SET_SHOWVH',true);
-                store.commit('SET_SHOWRADIUS',false);
-            }
+            // let shape = ev.item._cfg.keyShape._cfg.type;
         },
 
     });
@@ -121,6 +108,10 @@ function registerBehavior(G6){
             this._clearSelected();
             this.graph.setItemState(e.item, 'selected', true);
             let selectedItems = this.graph.get('selectedItems');
+            //传参
+            store.commit('SET_ITEMNODE',e.item);
+            //点击节点编辑内容
+            store.commit('SET_SHOWVIEW',true);
             if(!selectedItems)
                 selectedItems = [];
             selectedItems = [e.item.get('id')];

@@ -12,13 +12,7 @@ function clickAddNode (shape) {
             x: ev.x,
             y: ev.y,
             label: config.defaultText,
-            r : config.circleRadius,
-            size : [config.polygonWidth,config.polygonHeight],
-            color : config.defaultBckColor,
             id: Util.uniqueId(),
-            style : {
-                fill : config.defaultBckColor
-            },
             shape,
         });
     };
