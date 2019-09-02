@@ -19,11 +19,10 @@
 </script>
 
 
-<style scoped>
+<style >
     canvas {
         border: 1px solid red;
     }
-
     .sketchpad {
         display: flex;
         flex: 1;

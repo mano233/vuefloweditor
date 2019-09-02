@@ -221,7 +221,6 @@ function registerBehavior(G6){
             };
         },
         getEvents() {
-            debugger
             return {
                 'anchor:dragstart': 'onDragStart',
                 'anchor:drag': 'onDrag',

@@ -2,18 +2,28 @@
 
 <template>
     <div class="panel_left">
-       <ul>
-           <li>
-               <div id="circle" ref="circle" draggable="true">circle</div>
-           </li>
-           <li><div id="rect">rect</div></li>
-       </ul>
-   </div>
+        <a-collapse defaultActiveKey="1" :bordered="false">
+            <a-collapse-panel header="基础图形" key="1">
+                <div class="item_box">
+                    <div class="item">1</div>
+                    <div class="item">2</div>
+                    <div class="item">3</div>
+                    <div class="item">4</div>
+                    <div class="item">5</div>
+                </div>
+            </a-collapse-panel>
+        </a-collapse>
+    </div>
 </template>
 
 <script>
     export default {
         name: "ItemPanel",
+        data () {
+            return {
+                text: 'sssss',
+            }
+        },
         mounted () {
             this.$refs.circle.ondragstart = this.dragstartHandler;
         },
@@ -26,52 +36,35 @@
 </script>
 
 <style scoped>
-*{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-ul{
-    margin: 0;
-    padding: 0;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 
-.panel_left {
-    width: 220px;
-    background: #fafafa;
-    border-right: 1px solid #d0d0d0;
-}
-ul{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+    .panel_left {
+        width: 220px;
+        background: #fafafa;
+        border-right: 1px solid #d0d0d0;
+    }
 
-#circle,#rect{
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    line-height: 100px;
-    margin: 10px 0px;
-    cursor: pointer;
-    user-select:none;
-}
+    .item_box {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 
-#circle{
-    border-radius:50%;
-    background-color: orange;
-    opacity: 0.5;
-    color: #fff;
-}
-#rect{
-    width: 90px;
-    height: 90px;
-    background-color: lightskyblue;
-    color: #fff;
-    line-height: 90px;
-    border-color: deepskyblue;
-}
+    .item {
+        width: 40px;
+        height: 40px;
+        margin:4px;
+        display: flex;
+        flex-direction: column;
+    }
 
 
+    .item:hover{
+        border: 1px solid #b0b0b0;
+
+    }
 </style>
