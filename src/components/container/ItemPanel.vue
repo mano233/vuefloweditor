@@ -21,15 +21,7 @@
         name: "ItemPanel",
         data () {
             return {
-                text: 'sssss',
-            }
-        },
-        mounted () {
-            this.$refs.circle.ondragstart = this.dragstartHandler;
-        },
-        methods: {
-            dragstartHandler () {
-                console.log("开始拖动");
+
             }
         },
     }

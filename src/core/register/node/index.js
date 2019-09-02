@@ -1,5 +1,5 @@
 import editorStyle from "@/config/defaultStyle";
-import store from '../../../store'
+import config from '@/config/defaultConfig'
 const Item = require('@antv/g6/src/item/item');
 const SingleShapeMixin = require('@antv/g6/src/shape/single-shape-mixin');
 const Util = require('@antv/g6/src/util');
@@ -272,7 +272,38 @@ export function registerNode(G6){
         }
     }, 'base-node');
 
-
+    G6.registerNode('c-node', {
+        shapeType: 'circle',
+        selectedColor: '#FCD49A',
+        unSelectedColor: '#FEF7E8',
+        borderColor: '#FA8C16',
+        labelPosition: 'center',
+        iconWidth: 18,
+        iconHeight: 18,
+        iconPaddingLeft: 6,
+        iconPaddingTop: 6,
+        getShapeStyle(cfg) {
+          cfg.size = [30, 30];
+          cfg = this.initStyle(cfg);
+          const width = cfg.size[0];
+          const style = {
+            x: 0,
+            y: 0,
+            r: width / 2,
+            ...editorStyle.nodeStyle,
+            fill: cfg.unSelectedColor,
+            stroke: this.borderColor,
+          };
+          return style;
+        },
+        getAnchorPoints() {
+          return [
+            [0.5, 0], // top
+            [1, 0.5], // right
+            [0.5, 1], // bottom
+          ]
+        }
+      }, 'base-node');
 
     //重写圆形（目的：系统自带的圆形不能自定义文字颜色和尺寸）
     G6.registerNode('RewriteCircle', {
@@ -281,9 +312,9 @@ export function registerNode(G6){
                 attrs: {
                     x: 0,
                     y: 0,
-                    r: store.getters.circleRadius, //半径
-                    stroke: store.getters.strokeColor, //线条颜色
-                    fill: store.getters.defaultBckColor //背景颜色
+                    r: config.circleRadius, //半径
+                    stroke: config.strokeColor, //线条颜色
+                    fill: config.defaultBckColor //背景颜色
                 }
             });
            group.addShape('text', {
@@ -293,7 +324,7 @@ export function registerNode(G6){
                     textAlign: 'center',
                     text: cfg.label,
                     textBaseline: 'middle',
-                    fill: store.getters.defaultTextColor //文本颜色
+                    fill: config.defaultTextColor //文本颜色
                 }
             });
             return circle;
@@ -305,12 +336,12 @@ export function registerNode(G6){
         draw(cfg, group) {
             const rect = group.addShape('rect', {
                 attrs: {
-                    x : 0,
-                    y : 0,
-                    width: store.getters.polygonWidth, //宽度
-                    height: store.getters.polygonHeight, //高度
-                    stroke: store.getters.strokeColor, //线条颜色
-                    fill : store.getters.defaultBckColor //背景颜色
+                    x : - config.polygonWidth / 2,
+                    y : - config.polygonHeight / 2,
+                    width: config.polygonWidth, //宽度
+                    height: config.polygonHeight, //高度
+                    stroke: config.strokeColor, //线条颜色
+                    fill : config.defaultBckColor //背景颜色
                 }
             });
             group.addShape('text', {
@@ -320,13 +351,49 @@ export function registerNode(G6){
                     textAlign: 'center',
                     text: cfg.label,
                     textBaseline: 'middle',
-                    fill: store.getters.defaultTextColor //文本颜色
+                    fill: config.defaultTextColor //文本颜色
                 }
             });
             return rect;
         }
     });
 
+    //重写菱形（目的：系统自带的圆形不能自定义文字颜色和尺寸）
+    G6.registerNode('RewriteDiamond', {
+        shapeType: 'path',
+        selectedColor: '#8CE8DE',
+        unSelectedColor: '#E8FEFA',
+        borderColor: '#13C2C2',
+        labelPosition: 'bottom',
+        iconWidth: 20,
+        iconHeight: 20,
+        iconPaddingLeft: 2,
+        iconPaddingTop: 2,
+        getShapeStyle(cfg) {
+          cfg.size = [40, 40];
+          cfg = this.initStyle(cfg);
+          const width = cfg.size[0];
+          const height = cfg.size[1];
+          const gap = 4;
+          const style = {
+            path: [
+              ['M', 0 - gap, 0 - height / 2 + gap],
+              ['Q', 0, 0 - height / 2, gap, 0 - height / 2 + gap],
+              ['L', width / 2 - gap, 0 - gap],
+              ['Q', width / 2, 0, width / 2 - gap, gap],
+              ['L', gap, height / 2 - gap],
+              ['Q', 0, height / 2, 0 - gap, height / 2 - gap],
+              ['L', -width / 2 + gap, gap],
+              ['Q', -width / 2, 0, -width / 2 + gap, 0 - gap],
+              ['Z'] // close
+            ],
+            ...editorStyle.nodeStyle,
+            fill: cfg.unSelectedColor,
+            stroke: this.borderColor,
+          };
+          return style;
+        },
+      }, 'base-node');
 
 }
 

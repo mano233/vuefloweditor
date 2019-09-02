@@ -13,17 +13,17 @@
                     </a-form-item>
 
                     <!--宽度-->
-                    <a-form-item label="width">
+                    <a-form-item label="width" v-if="showVH">
                         <a-input id="width" v-model="widthData"   />
                     </a-form-item>
 
                     <!--高度-->
-                    <a-form-item label="height">
+                    <a-form-item label="height" v-if="showVH">
                         <a-input id="height" v-model="heightData"  />
                     </a-form-item>
 
                     <!--半径-->
-                    <a-form-item label="radius">
+                    <a-form-item label="radius" v-if="showRadius">
                         <a-input type="number" id="radius" v-model="radiusData" />
                     </a-form-item>
 
@@ -32,14 +32,14 @@
                     </a-form-item>
 
 
-                    <!--&lt;!&ndash;添加下一个节点&ndash;&gt;-->
-                    <!--<a-button @click="addNode">下一节点</a-button>-->
+                    <!--添加下一个节点-->
+                    <a-button @click="addNode">下一节点</a-button>
 
-                    <!--&lt;!&ndash;复制节点&ndash;&gt;-->
-                    <!--<a-button @click="copyNode">复制节点</a-button>-->
+                    <!--复制节点-->
+                    <a-button @click="copyNode">复制节点</a-button>
 
-                    <!--&lt;!&ndash;删除节点&ndash;&gt;-->
-                    <!--<a-button @click="deleteNode">删除节点</a-button>-->
+                    <!--删除节点-->
+                    <a-button @click="deleteNode">删除节点</a-button>
 
                 </a-form>
             </div>
@@ -52,44 +52,43 @@
         name: "Details",
         data(){
             return {
-                radiusData : 0,
-                labelData : '',
+                labelData : '', //文本内容
+                color : '', //背景颜色
+                radiusData : 0, //圆形半径
+                widthData : 0, //矩形宽度
+                heightData : 0, //矩形高度
             }
         },
-        mounted(){
-            //圆形半径
-            this.radiusData =  this.$store.getters.circleRadius;
+        updated(){
             //文本内容
-            this.labelData =  this.$store.getters.defaultText;
+            this.labelData = this.$store.getters.itemNode._cfg.model.label;
+            //背景颜色
+            this.color = this.$store.getters.itemNode._cfg.model.color;
+            // 圆形半径
+            this.radiusData = this.$store.getters.itemNode._cfg.model.r;
+            //矩形宽度
+            this.widthData = this.$store.getters.itemNode._cfg.model.size[0];
+            //矩形高度
+            this.heightData = this.$store.getters.itemNode._cfg.model.size[1];
         },
         computed : {
-            // //文本内容
-            // labelData(){
-            //     return this.$store.getters.defaultText;
-            // },
-            //矩形宽度
-            widthData(){
-                return this.$store.getters.polygonWidth;
-            },
-            //矩形高度
-            heightData(){
-                return this.$store.getters.polygonHeight;
-            },
-            //背景颜色
-            color(){
-                return this.$store.getters.defaultBckColor;
-            },
             //是否展示编辑框
             showView(){
                 return this.$store.getters.showEditor;
+            },
+            //是否展示宽高
+            showVH(){
+                return this.$store.getters.showVH;
+            },
+            //是否展示半径
+            showRadius(){
+                return this.$store.getters.showRadius;
             }
         },
         methods : {
             //改变内容
             changeLabel(){
-                this.$store.commit('SET_DEFAULTTEXT',);
-                this.$g.updateItem(this.$store.getters.defaultText,{label:this.labelData});
-                this.$g.refresh();
+                this.$g.updateItem(this.$store.getters.itemNode,{label:this.labelData});
             }
         }
 

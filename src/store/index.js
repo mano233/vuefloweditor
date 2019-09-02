@@ -10,34 +10,26 @@ const types = {
     SET_SHOWVIEW : 'SET_SHOWVIEW',
     SET_CIRCLERADIUS : 'SET_CIRCLERADIUS',
     SET_DEFAULTTEXT : 'SET_DEFAULTTEXT',
+    SET_SHOWVH : 'SET_SHOWVH',
+    SET_SHOWRADIUS : 'SET_SHOWRADIUS',
 }
 
 // state
 const state = {
-    defaultBckColor : '#000', //默认背景颜色
-    defaultTextColor : '#fff', //默认文字颜色
-    defaultText : 'start', //默认文字内容
-    circleRadius : 30, //存储圆形的半径
-    polygonWidth : 70, //存储多边形的宽度
-    polygonHeight : 50, //存储多边形的高度
-    strokeColor : '#444', //线条颜色
     result : null, //存储canvas打印结果
     itemNode : null, //存储元素节点对象
-    showEditor : false //是否展示编辑页面
+    showEditor : false, //是否展示编辑页面
+    showVH : false, //是否展示高度和宽度
+    showRadius : false, //是否展示半径
 }
 
 // getters
 const getters = {
-    defaultBckColor : state => state.defaultBckColor,
-    defaultTextColor : state => state.defaultTextColor,
-    defaultText : state => state.defaultText,
-    circleRadius : state => state.circleRadius,
-    polygonWidth : state => state.polygonWidth,
-    polygonHeight : state => state.polygonHeight,
-    strokeColor : state => state.strokeColor,
     result : state => state.result,
     itemNode : state => state.itemNode,
     showEditor : state => state.showEditor,
+    showVH : state => state.showVH,
+    showRadius : state => state.showRadius,
 }
 
 // mutations
@@ -129,6 +121,7 @@ const mutations = {
                 state.itemNode = null;
             }
         },
+
         //修改是否展示编辑框
         [types.SET_SHOWVIEW](state,showEditor){
             console.log(showEditor);
@@ -139,12 +132,30 @@ const mutations = {
             }
         },
 
-        //修改是否展示编辑框
+        //修改文件内容
         [types.SET_DEFAULTTEXT](state,defaultText){
             if (defaultText) {
                 state.defaultText = defaultText;
             } else {
                 state.defaultText = '';
+            }
+        },
+
+        //修改是否展示高度框
+        [types.SET_SHOWVH](state,showVH){
+            if (showVH) {
+                state.showVH = showVH;
+            } else {
+                state.showVH = false;
+            }
+        },
+
+        //修改是否展示半径框
+        [types.SET_SHOWRADIUS](state,showRadius){
+            if (showRadius) {
+                state.showRadius = showRadius;
+            } else {
+                state.showRadius = false;
             }
         },
 

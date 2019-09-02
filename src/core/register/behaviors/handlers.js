@@ -1,19 +1,23 @@
 import {behaviorsCallBack} from './index';
-import store from '../../../store'
+import config from '@/config/defaultConfig'
 import {Util} from '@antv/g6/src';
 
 
 // behaviors中用的到具体回调函数
 function clickAddNode (shape) {
+
     behaviorsCallBack.onClickAddNode = function (ev) {
         const graph = this.graph;
         this.node = graph.addItem('node', {
             x: ev.x,
             y: ev.y,
-            label: store.getters.defaultText,
+            label: config.defaultText,
+            r : config.circleRadius,
+            size : [config.polygonWidth,config.polygonHeight],
+            color : config.defaultBckColor,
             id: Util.uniqueId(),
             style : {
-                fill : store.getters.defaultBckColor
+                fill : config.defaultBckColor
             },
             shape,
         });

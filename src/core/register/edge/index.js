@@ -305,4 +305,5 @@ export function registerEdge(G6){
         },
     },'polyline');
 
+
 }
